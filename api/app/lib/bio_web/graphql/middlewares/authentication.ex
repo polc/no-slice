@@ -1,4 +1,5 @@
 defmodule BioWeb.GraphQL.Middlewares.Authentication do
+  @moduledoc false
   @behaviour Absinthe.Middleware
 
   def call(resolution, _config) do

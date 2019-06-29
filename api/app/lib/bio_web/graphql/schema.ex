@@ -1,4 +1,6 @@
 defmodule BioWeb.GraphQL.Schema do
+  @moduledoc false
+
   import Absinthe.Resolution.Helpers, only: [dataloader: 1]
 
   use Absinthe.Schema

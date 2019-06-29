@@ -1,4 +1,6 @@
 defmodule BioWeb do
+  @moduledoc false
+
   def router do
     quote do
       use Phoenix.Router

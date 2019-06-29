@@ -1,9 +1,11 @@
 defmodule Bio.Accounts.Dataloader do
+  @moduledoc false
+
   import Ecto.Query, only: [from: 2]
 
-  alias Bio.Repository
   alias Bio.Accounts.Schemas.Account
   alias Bio.Accounts.Schemas.User
+  alias Bio.Repository
 
   @doc """
   Find one account using his ID.
@@ -20,7 +22,7 @@ defmodule Bio.Accounts.Dataloader do
     Repository.get_by(User, email: email)
   end
 
-  def data() do
+  def data do
     Dataloader.Ecto.new(Repository, query: &query/2)
   end
 

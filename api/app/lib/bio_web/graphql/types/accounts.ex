@@ -1,4 +1,6 @@
 defmodule BioWeb.GraphQL.Types.Accounts do
+  @moduledoc false
+
   use Absinthe.Schema.Notation
   use Absinthe.Relay.Schema.Notation, :modern
 
@@ -76,7 +78,8 @@ defmodule BioWeb.GraphQL.Types.Accounts do
 
       resolve(fn
         input, _ ->
-          Bio.Accounts.UseCases.CreateAccount.call(input)
+          input
+          |> Bio.Accounts.UseCases.CreateAccount.call()
           |> Bio.Repository.transaction()
           |> case do
             {:ok, %{account: account}} ->

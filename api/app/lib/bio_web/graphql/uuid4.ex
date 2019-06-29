@@ -1,4 +1,6 @@
 defmodule BioWeb.GraphQL.UUID4 do
+  @moduledoc false
+
   use Absinthe.Schema.Notation
   alias Ecto.UUID
 

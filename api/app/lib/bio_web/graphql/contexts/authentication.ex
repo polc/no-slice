@@ -1,7 +1,9 @@
 defmodule BioWeb.GraphQL.Contexts.Authentication do
+  @moduledoc false
   @behaviour Plug
 
   import Plug.Conn
+  alias Bio.Accounts.Dataloader
   alias Bio.Accounts.Schemas.User
   alias BioWeb.Security.AuthenticationToken
 
@@ -18,7 +20,7 @@ defmodule BioWeb.GraphQL.Contexts.Authentication do
   def build_context(conn) do
     with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
          {:ok, %{"user_id" => user_id}} <- AuthenticationToken.verify_and_validate(token),
-         %User{} = user <- Bio.Accounts.Dataloader.find_user(user_id) do
+         %User{} = user <- Dataloader.find_user(user_id) do
       %{user: user, token: token}
     else
       _ -> %{}

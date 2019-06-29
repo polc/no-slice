@@ -1,4 +1,6 @@
 defmodule BioWeb.GraphQL.Error do
+  @moduledoc false
+
   use Absinthe.Schema.Notation
 
   @desc "An error."
