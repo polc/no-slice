@@ -2,8 +2,12 @@ version: '3.7'
 
 services:
   app:
+    build:
+      context: .
+      dockerfile: docker/app/dev.Dockerfile
     environment:
       - MIX_ENV=test
+      - APP_HOST=localhost
     depends_on:
       - database
 

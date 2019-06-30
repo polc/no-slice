@@ -5,10 +5,11 @@ defmodule App.MixProject do
     [
       app: :bio,
       version: "0.1.0",
-      elixir: "~> 1.5",
+      elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
+      releases: releases(),
       aliases: aliases(),
       deps: deps()
     ]
@@ -24,6 +25,23 @@ defmodule App.MixProject do
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
+
+  defp releases do
+    [
+      default: [
+        include_executables_for: [:unix]
+      ]
+    ]
+  end
+
+  defp aliases do
+    [
+      start: ["ecto.setup", "phx.server"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repository/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+    ]
+  end
 
   defp deps do
     [
@@ -41,15 +59,6 @@ defmodule App.MixProject do
       {:phoenix_ecto, "~> 4.0"},
       {:phoenix_pubsub, "~> 1.1"},
       {:postgrex, ">= 0.0.0"}
-    ]
-  end
-
-  defp aliases do
-    [
-      start: ["ecto.setup", "phx.server"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repository/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
 end

@@ -4,7 +4,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: docker/app/Dockerfile
+      dockerfile: docker/app/prod.Dockerfile
     environment:
       - APP_SECRET=${APP_SECRET}
       - DATABASE_PORT=5432

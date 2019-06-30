@@ -15,7 +15,8 @@ COPY --chown=docker:docker ./app/mix.* ./
 
 RUN mix local.hex --force \
     && mix local.rebar --force \
-    && mix do deps.get, deps.compile, compile
+    && mix do deps.get
+    #, deps.compile, compile
 
 COPY --chown=docker:docker ./app ./
 

@@ -2,14 +2,9 @@ version: '3.7'
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: docker/app/dev.Dockerfile
     environment:
-      - MIX_ENV=dev
+      - MIX_ENV=prod
       - APP_HOST=localhost
-    volumes:
-      - './app:/usr/src/app'
     ports:
       - '80:8080'
     depends_on:

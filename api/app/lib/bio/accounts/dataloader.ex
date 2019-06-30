@@ -1,8 +1,6 @@
 defmodule Bio.Accounts.Dataloader do
   @moduledoc false
 
-  import Ecto.Query, only: [from: 2]
-
   alias Bio.Accounts.Schemas.Account
   alias Bio.Accounts.Schemas.User
   alias Bio.Repository
