@@ -4,7 +4,7 @@ defmodule Bio.Repository.Migrations.CreateAccounts do
   def change do
     create table(:accounts, primary_key: false) do
       add :id, :uuid, primary_key: true
-      timestamps()
+      timestamps(type: :timestamptz)
     end
 
     create table(:users, primary_key: false) do
@@ -12,7 +12,7 @@ defmodule Bio.Repository.Migrations.CreateAccounts do
       add :email, :string, null: false
       add :first_name, :string, null: false
       add :password_hash, :string, null: false
-      timestamps()
+      timestamps(type: :timestamptz)
 
       add :account_id, references(:accounts, type: :uuid, on_delete: :delete_all)
     end

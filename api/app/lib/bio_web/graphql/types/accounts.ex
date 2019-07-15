@@ -38,6 +38,34 @@ defmodule BioWeb.GraphQL.Types.Accounts do
   end
 
   object :accounts_mutations do
+    payload field :create_account do
+      input do
+        field :email, non_null(:string)
+        field :password, non_null(:string)
+        field :first_name, non_null(:string)
+      end
+
+      output do
+        field :result, :viewer
+        field :errors, list_of(:error)
+      end
+
+      resolve(fn
+        input, _ ->
+          input
+          |> Bio.Accounts.UseCases.CreateAccount.call()
+          |> Bio.Repository.transaction()
+          |> case do
+            {:ok, %{user: user}} ->
+              token = AuthenticationToken.generate_and_sign!(%{"user_id" => user.id})
+              {:ok, %{result: %{user: user, token: token}}}
+
+            {:error, _, changeset, _} ->
+              {:ok, %{errors: BioWeb.GraphQL.Error.changeset_to_errors(changeset)}}
+          end
+      end)
+    end
+
     payload field :create_token do
       input do
         field :email, non_null(:string)
@@ -64,26 +92,51 @@ defmodule BioWeb.GraphQL.Types.Accounts do
       end)
     end
 
-    payload field :create_account do
+    payload field :request_password do
       input do
         field :email, non_null(:string)
-        field :password, non_null(:string)
-        field :first_name, non_null(:string)
       end
 
       output do
-        field :result, :account
+        field :result, :string
         field :errors, list_of(:error)
       end
 
       resolve(fn
         input, _ ->
           input
-          |> Bio.Accounts.UseCases.CreateAccount.call()
+          |> Bio.Accounts.UseCases.RequestPassword.call()
           |> Bio.Repository.transaction()
           |> case do
-            {:ok, %{account: account}} ->
-              {:ok, %{result: account}}
+            {:ok, _} ->
+              {:ok, %{result: "success"}}
+
+            {:error, _, changeset, _} ->
+              {:ok, %{errors: BioWeb.GraphQL.Error.changeset_to_errors(changeset)}}
+          end
+      end)
+    end
+
+    payload field :change_password do
+      input do
+        field :id, non_null(:string)
+        field :code, non_null(:string)
+        field :new_password, non_null(:string)
+      end
+
+      output do
+        field :result, :string
+        field :errors, list_of(:error)
+      end
+
+      resolve(fn
+        input, _ ->
+          input
+          |> Bio.Accounts.UseCases.ChangePassword.call()
+          |> Bio.Repository.transaction()
+          |> case do
+            {:ok, _} ->
+              {:ok, %{result: "success"}}
 
             {:error, _, changeset, _} ->
               {:ok, %{errors: BioWeb.GraphQL.Error.changeset_to_errors(changeset)}}

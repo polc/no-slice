@@ -52,6 +52,7 @@ defmodule App.MixProject do
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:dataloader, "~> 1.0.0"},
       {:ecto_sql, "~> 3.0"},
+      {:ex_crypto, "~> 0.10.0"},
       {:jason, "~> 1.0"},
       {:joken, "~> 2.0"},
       {:plug_cowboy, "~> 2.0"},

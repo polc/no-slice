@@ -1,7 +1,5 @@
 defmodule Bio.Accounts.Schemas.User do
-  @moduledoc """
-  The users schema.
-  """
+  @moduledoc false
 
   use Ecto.Schema
   import Ecto.Changeset
@@ -14,18 +12,19 @@ defmodule Bio.Accounts.Schemas.User do
     field :email, :string
     field :first_name, :string
     field :password_hash, :string
-    timestamps()
+    timestamps(type: :utc_datetime)
 
     belongs_to :account, Bio.Accounts.Schemas.Account
-    # has_one :account, Bio.Accounts.Schemas.Account
+    has_many :password_requests, Bio.Accounts.Schemas.PasswordRequest
   end
 
   def changeset(user, attrs \\ %{}) do
     user
-    |> cast(attrs, [:email, :first_name, :password_hash])
-    |> validate_required([:email, :first_name, :password_hash])
+    |> cast(attrs, [:email, :first_name, :password_hash, :account_id])
+    |> validate_required([:email, :first_name, :password_hash, :account_id])
     |> validate_length(:email, min: 1, max: 254)
     |> validate_length(:first_name, min: 1, max: 254)
     |> unique_constraint(:email)
+    |> foreign_key_constraint(:account_id)
   end
 end

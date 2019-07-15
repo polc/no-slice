@@ -11,7 +11,7 @@ defmodule Bio.Accounts.Schemas.Account do
   @derive {Phoenix.Param, key: :id}
 
   schema "accounts" do
-    timestamps()
+    timestamps(type: :utc_datetime)
     has_many :users, Bio.Accounts.Schemas.User
   end
 
