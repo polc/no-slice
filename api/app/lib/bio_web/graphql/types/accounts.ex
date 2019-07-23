@@ -16,13 +16,13 @@ defmodule BioWeb.GraphQL.Types.Accounts do
   end
 
   node object(:user) do
-    field :email, :string
-    field :first_name, :string
+    field :email, non_null(:string)
+    field :first_name, non_null(:string)
     field :account, non_null(:account), resolve: dataloader(Bio.Accounts.Dataloader)
   end
 
   node object(:account) do
-    field :type, :string
+    field :type, non_null(:string)
     field :users, non_null(list_of(:user)), resolve: dataloader(Bio.Accounts.Dataloader)
   end
 

@@ -49,6 +49,7 @@ defmodule App.MixProject do
       {:absinthe_relay, "~> 1.4"},
       {:absinthe_plug, "~> 1.4"},
       {:bcrypt_elixir, "~> 2.0"},
+      {:cors_plug, "~> 2.0"},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:dataloader, "~> 1.0.0"},
       {:ecto_sql, "~> 3.0"},

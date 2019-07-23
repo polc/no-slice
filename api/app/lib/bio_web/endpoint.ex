@@ -13,5 +13,5 @@ defmodule BioWeb.Endpoint do
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
 
-  plug BioWeb.Router
+  plug BioWeb.Plug.Router
 end
