@@ -1,0 +1,95 @@
+schema {
+  query: RootQueryType
+  mutation: RootMutationType
+}
+
+type Account implements Node {
+  """The ID of an object"""
+  id: ID!
+  type: String!
+  users: [User]!
+}
+
+input ChangePasswordInput {
+  code: String!
+  id: String!
+  newPassword: String!
+}
+
+type ChangePasswordPayload {
+  errors: [Error]
+  result: String
+}
+
+input CreateAccountInput {
+  email: String!
+  firstName: String!
+  password: String!
+}
+
+type CreateAccountPayload {
+  errors: [Error]
+  result: Viewer
+}
+
+input CreateTokenInput {
+  email: String!
+  password: String!
+}
+
+type CreateTokenPayload {
+  errors: [Error]
+  result: Viewer
+}
+
+"""An error."""
+type Error {
+  message: String!
+  property: String!
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+input RequestPasswordInput {
+  email: String!
+}
+
+type RequestPasswordPayload {
+  errors: [Error]
+  result: String
+}
+
+type RootMutationType {
+  changePassword(input: ChangePasswordInput!): ChangePasswordPayload
+  createAccount(input: CreateAccountInput!): CreateAccountPayload
+  createToken(input: CreateTokenInput!): CreateTokenPayload
+  requestPassword(input: RequestPasswordInput!): RequestPasswordPayload
+}
+
+type RootQueryType {
+  """Fetches an object given its ID"""
+  node(
+    """The id of an object."""
+    id: ID!
+  ): Node
+  viewer: Viewer
+}
+
+type User implements Node {
+  account: Account!
+  email: String!
+  firstName: String!
+
+  """The ID of an object"""
+  id: ID!
+}
+
+type Viewer {
+  token: String!
+  user: User!
+}
+
