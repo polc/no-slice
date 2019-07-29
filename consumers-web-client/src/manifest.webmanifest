@@ -3,7 +3,7 @@
   "name": "Bio App",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "./assets/favicon.ico",
       "sizes": "192x192",
       "type": "image/png"
     }
