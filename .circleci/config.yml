@@ -1,0 +1,47 @@
+version: 2
+
+jobs:
+  api:
+    working_directory: ~/no-slice/api
+    docker:
+      - image: "circleci/buildpack-deps:bionic"
+        environment:
+          COMPOSE_FILE: docker-compose.yml:docker-compose.ci.yml
+    steps:
+      - checkout:
+          path: ~/no-slice
+
+      - setup_remote_docker:
+          reusable: true
+
+      - run:
+          name: Start application
+          command: |
+            set -x
+            cp .env.dist .env
+            docker-compose up -d --build
+
+      - run:
+          name: Run migrations
+          command: |
+            set -x
+            docker-compose exec app mix ecto.create
+            docker-compose exec app mix ecto.migrate
+
+      - run:
+          name: Run static analysis
+          command: |
+            set -x
+            docker-compose exec app mix credo
+
+      - run:
+          name: Run code style analysis
+          command: |
+            set -x
+            docker-compose exec app mix format --check-formatted
+
+workflows:
+  version: 2
+  tests:
+    jobs:
+      - api

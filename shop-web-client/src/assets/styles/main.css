@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  /* Elm can't control the <body> element, so to have scrollable modals we control the overflow in an absolute <div>. */
+  @apply overflow-hidden;
+}
+
+.-mb-2px {
+  margin-bottom: -2px;
+}
+
+.ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/prod.Dockerfile
+    environment:
+      - APP_SECRET=${APP_SECRET}
+      - DATABASE_PORT=5432
+      - DATABASE_HOST=database
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USER=${DATABASE_USERNAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}

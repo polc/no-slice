@@ -1,0 +1,25 @@
+{
+  "name": "web-client",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "parcel serve src/index.html",
+    "build": "parcel build src/index.html",
+    "lint": "elm-format src/ --yes",
+    "test": "elm-test"
+  },
+  "devDependencies": {
+    "@tailwindcss/custom-forms": "^0.2.0",
+    "elm": "^0.19.0-no-deps",
+    "elm-format": "^0.8.1",
+    "elm-hot": "^1.1.1",
+    "elm-test": "^0.19.0",
+    "node-elm-compiler": "^5.0.4",
+    "parcel-bundler": "^1.12.3"
+  },
+  "dependencies": {
+    "@fullhuman/postcss-purgecss": "^1.2.0",
+    "postcss-import": "^12.0.1",
+    "tailwindcss": "^1.1.0"
+  }
+}
