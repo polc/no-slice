@@ -6,6 +6,7 @@ import Html exposing (..)
 import Html.Attributes exposing (attribute, class, placeholder, type_)
 import Html.Events exposing (onClick)
 import Illustration
+import Route exposing (..)
 import Session exposing (..)
 import UI
 

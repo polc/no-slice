@@ -142,9 +142,11 @@ productView ( productId, product ) =
 
 cartModalView : Cart -> (ProductId -> msg) -> Html msg
 cartModalView cart removeMsg =
-    div [ class "fixed inset-0 h-full w-full flex" ]
-        [ cartView cart
-            removeMsg
-            [ UI.largeButton "a" [ href Route.Checkout, class "mb-56" ] [ text "Check out" ]
+    div [ class "fixed inset-0 h-full w-full overflow-y-auto bg-white" ]
+        [ div [ class "relative flex" ]
+            [ cartView cart
+                removeMsg
+                [ UI.largeButton "a" [ href Route.Checkout, class "mb-24" ] [ text "Check out" ]
+                ]
             ]
         ]
