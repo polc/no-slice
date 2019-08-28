@@ -56,7 +56,7 @@ view model =
             [ div [ class "hidden md:block flex-shrink-0 h-screen w-96 sticky top-0 flex" ]
                 [ cartView model.session.cart RemoveProductFromCart []
                 ]
-            , div [ class "md:mt-12 w-full flex flex-wrap justify-center" ]
+            , div [ class "md:mt-12 mb-6 w-full flex flex-wrap justify-center" ]
                 [ div [ class "w-full max-w-lg mt-4 mx-4 p-4 sm:p-8 bg-white shadow-lg" ]
                     [ formHeader 1 "Delivery Address"
                     , form [ class "mt-8" ]
