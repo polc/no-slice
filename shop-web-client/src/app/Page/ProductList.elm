@@ -67,7 +67,7 @@ view { session, showCartModal } =
 
               else
                 text ""
-            , modalButtonView showCartModal session.cart
+            , bottomBarView showCartModal session.cart
             , div [ class "flex" ]
                 [ div [ class "max-w-6xl mx-auto mt-4 mb-12 sm:mt-12 sm:mb-4" ] (List.map categoryView categories)
                 , div [ class "hidden md:block flex-shrink-0 md:h-screen w-full md:w-96 sticky top-0 flex" ]
@@ -83,29 +83,6 @@ view { session, showCartModal } =
                 ]
             ]
     }
-
-
-modalButtonView : Bool -> Cart -> Html Msg
-modalButtonView showCartModal cart =
-    if Dict.size cart.items > 0 || showCartModal then
-        button [ class "md:hidden z-0 h-16 w-full bg-green-700 fixed bottom-0 px-6 py-2 flex items-baseline justify-between text-white", onClick ToggleCartModal ]
-            (if showCartModal then
-                [ span [ class "text-center font-display font-bold tracking-wide" ] [ text "Back to products" ] ]
-
-             else
-                [ span [ class "flex border p-1 rounded" ]
-                    [ cart |> cartNumberOfItems |> String.fromInt |> text
-                    , Illustration.shoppingCart "mt-1 ml-2 h-4 w-4"
-                    ]
-                , span [ class "font-display font-bold tracking-wide" ]
-                    [ text "View order"
-                    ]
-                , span [] [ cart |> cartPrice |> priceView ]
-                ]
-            )
-
-    else
-        text ""
 
 
 categoryView : Category -> Html Msg
@@ -140,13 +117,48 @@ productView ( productId, product ) =
         ]
 
 
+bottomBarView : Bool -> Cart -> Html Msg
+bottomBarView showCartModal cart =
+    if Dict.size cart.items > 0 || showCartModal then
+        div [ class "md:hidden h-16 w-full fixed bottom-0" ]
+            [ if showCartModal then
+                checkoutBarView cart
+
+              else
+                cartSummaryBar cart
+            ]
+
+    else
+        text ""
+
+
+checkoutBarView : Cart -> Html Msg
+checkoutBarView cart =
+    div [ class "h-full flex shadow-t-xl" ]
+        [ button [ class "w-1/3 h-full flex items-center justify-center bg-white text-gray-700 font-bold", onClick ToggleCartModal ] [ text "Back" ]
+        , a [ class "w-2/3 h-full flex items-center justify-center bg-green-700 text-white font-bold", href Route.Checkout ] [ text "Check out" ]
+        ]
+
+
+cartSummaryBar : Cart -> Html Msg
+cartSummaryBar cart =
+    button [ class "h-full w-full px-6 py-2 bg-green-700 flex items-baseline justify-between text-white", onClick ToggleCartModal ]
+        [ span [ class "flex border-2 p-1 rounded" ]
+            [ cart |> cartNumberOfItems |> String.fromInt |> text
+            , Illustration.shoppingCart "mt-1 ml-2 h-4 w-4"
+            ]
+        , span [ class "font-display font-bold tracking-wide" ]
+            [ text "View order"
+            ]
+        , span [] [ cart |> cartPrice |> priceView ]
+        ]
+
+
 cartModalView : Cart -> (ProductId -> msg) -> Html msg
 cartModalView cart removeMsg =
-    div [ class "fixed inset-0 h-full w-full overflow-y-auto bg-white" ]
-        [ div [ class "relative flex" ]
-            [ cartView cart
-                removeMsg
-                [ UI.largeButton "a" [ href Route.Checkout, class "mb-24" ] [ text "Check out" ]
-                ]
+    div [ class "fixed inset-0 h-full w-full overflow-y-auto" ]
+        [ div [ class "relative flex h-full" ]
+            [ cartView cart removeMsg []
+            , div [ class "mb-24" ] []
             ]
         ]
