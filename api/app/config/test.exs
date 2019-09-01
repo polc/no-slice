@@ -1,10 +1,10 @@
 import Config
 
 # We don't run a server during test.
-config :bio, BioWeb.Endpoint, server: false
+config :no_slice, NoSliceWeb.Endpoint, server: false
 
 # Configure your database
-config :bio, Bio.Repository,
+config :no_slice, NoSlice.Repository,
   database: System.get_env("DATABASE_NAME") <> "_test",
   pool: Ecto.Adapters.SQL.Sandbox
 

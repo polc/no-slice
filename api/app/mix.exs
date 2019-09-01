@@ -3,7 +3,7 @@ defmodule App.MixProject do
 
   def project do
     [
-      app: :bio,
+      app: :no_slice,
       version: "0.1.0",
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -17,7 +17,7 @@ defmodule App.MixProject do
 
   def application do
     [
-      mod: {Bio.Application, []},
+      mod: {NoSlice.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

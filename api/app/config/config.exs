@@ -1,18 +1,18 @@
 import Config
 
-config :bio,
-  ecto_repos: [Bio.Repository]
+config :no_slice,
+  ecto_repos: [NoSlice.Repository]
 
 # Configures the endpoint
-config :bio, BioWeb.Endpoint,
+config :no_slice, NoSliceWeb.Endpoint,
   http: [port: 8080],
   url: [host: System.get_env("APP_HOST")],
   secret_key_base: System.get_env("APP_SECRET"),
-  render_errors: [view: BioWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Bio.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: NoSliceWeb.ErrorView, accepts: ~w(json)],
+  pubsub: [name: NoSlice.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configure your database
-config :bio, Bio.Repository,
+config :no_slice, NoSlice.Repository,
   port: System.get_env("DATABASE_PORT"),
   hostname: System.get_env("DATABASE_HOST"),
   database: System.get_env("DATABASE_NAME"),

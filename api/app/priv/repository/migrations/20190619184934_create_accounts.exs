@@ -1,4 +1,4 @@
-defmodule Bio.Repository.Migrations.CreateAccounts do
+defmodule NoSlice.Repository.Migrations.CreateAccounts do
   use Ecto.Migration
 
   def change do

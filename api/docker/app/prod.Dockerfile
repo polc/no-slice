@@ -17,7 +17,7 @@ RUN mix release
 FROM alpine:3.9
 
 RUN apk add ncurses-dev --no-cache
-WORKDIR /usr/src/bio
+WORKDIR /usr/src/no-slice
 
 RUN addgroup -g 1000 docker \
     && adduser -D -G docker -u 1000 docker \

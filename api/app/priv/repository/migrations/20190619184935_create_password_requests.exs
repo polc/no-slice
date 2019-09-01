@@ -1,4 +1,4 @@
-defmodule Bio.Repository.Migrations.CreatePasswordRequests do
+defmodule NoSlice.Repository.Migrations.CreatePasswordRequests do
   use Ecto.Migration
 
   def change do

@@ -1,4 +1,4 @@
-defmodule Bio.DataCase do
+defmodule NoSlice.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,20 +16,20 @@ defmodule Bio.DataCase do
 
   using do
     quote do
-      alias Bio.Repo
+      alias NoSlice.Repository
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Bio.DataCase
+      import NoSlice.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Bio.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(NoSlice.Repository)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Bio.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(NoSlice.Repository, {:shared, self()})
     end
 
     :ok

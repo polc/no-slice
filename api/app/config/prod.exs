@@ -1,3 +1,3 @@
 import Config
 
-config :bio, BioWeb.Endpoint, server: true
+config :no_slice, NoSliceWeb.Endpoint, server: true

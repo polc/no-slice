@@ -1,6 +1,5 @@
 # NoSlice API
 
-
 ## Installation for development
 
 ```bash
@@ -8,10 +7,7 @@
 cp .env.dist .env
 
 # Start project
-docker-compose up -d --build
-
-# Install dependencies
-docker-compose exec app mix deps.get
+docker-compose up --build
 
 # Initialize database
 docker-compose exec app mix ecto.migrate

@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(Bio.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(NoSlice.Repository, :manual)

@@ -1,14 +1,14 @@
 import Config
 
 # For development, we disable any cache and enable debugging and code reloading.
-config :bio, BioWeb.Endpoint,
+config :no_slice, NoSliceWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
   watchers: []
 
 # Configure database
-config :bio, Bio.Repository, pool_size: 10
+config :no_slice, NoSlice.Repository, pool_size: 10
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n", level: :debug
