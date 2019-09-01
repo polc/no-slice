@@ -15,8 +15,7 @@ defmodule NoSliceWeb.Plug.DecodeToken do
 
   def handle_authorization_header(conn, ["Bearer " <> token]) do
     with {:ok, %{"user_id" => user_id}} <- AuthenticationToken.verify_and_validate(token),
-         %User{} = user <- Dataloader.find_user(user_id)
-    do
+         %User{} = user <- Dataloader.find_user(user_id) do
       conn
       |> assign(:user, user)
       |> assign(:token, token)
@@ -24,7 +23,7 @@ defmodule NoSliceWeb.Plug.DecodeToken do
       _ ->
         conn
         |> put_status(:unauthorized)
-        |> Phoenix.Controller.json(%{ message: "Unauthorized." })
+        |> Phoenix.Controller.json(%{message: "Unauthorized."})
         |> halt
     end
   end
@@ -33,25 +32,3 @@ defmodule NoSliceWeb.Plug.DecodeToken do
     conn
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

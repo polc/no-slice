@@ -4,8 +4,8 @@ defmodule NoSlice.Accounts.Dataloader do
   import Ecto.Query
 
   alias NoSlice.Accounts.Schemas.Account
-  alias NoSlice.Accounts.Schemas.User
   alias NoSlice.Accounts.Schemas.PasswordRequest
+  alias NoSlice.Accounts.Schemas.User
   alias NoSlice.Repository
 
   def find_account(id) do
@@ -33,7 +33,7 @@ defmodule NoSlice.Accounts.Dataloader do
     |> Repository.aggregate(:count, :id)
   end
 
-  defp query_valid_password_requests() do
+  defp query_valid_password_requests do
     # a password request is valid 10 minutes (-600)
     date = DateTime.utc_now() |> DateTime.add(-60_000_000, :second)
 

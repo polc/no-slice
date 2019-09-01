@@ -52,9 +52,6 @@ defmodule NoSlice.Accounts.UseCases.RequestPassword do
       end
     end)
     |> Multi.run(:send_email, fn _, %{password_request: %{code: code, id: id}} ->
-      IO.inspect(id)
-      IO.inspect(code)
-
       {:ok, nil}
     end)
   end

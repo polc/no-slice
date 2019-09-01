@@ -7,8 +7,8 @@ defmodule NoSlice.Accounts.UseCases.ChangePassword do
   import Ecto.Changeset
   alias Ecto.Multi
 
-  alias NoSlice.Accounts.Schemas.User
   alias NoSlice.Accounts.Schemas.PasswordRequest
+  alias NoSlice.Accounts.Schemas.User
 
   @primary_key false
   embedded_schema do
@@ -38,6 +38,7 @@ defmodule NoSlice.Accounts.UseCases.ChangePassword do
           nil -> {:error, add_error(changeset, :code, "Invalid code.")}
           password_request -> {:ok, password_request}
         end
+
       :error ->
         {:error, add_error(changeset, :id, "Invalid ID.")}
     end
@@ -51,15 +52,19 @@ defmodule NoSlice.Accounts.UseCases.ChangePassword do
   end
 
   defp update_password(repo, %{password_request: password_request}, new_password) do
-    repo.update(User.changeset(password_request.user, %{
-      password_hash: Bcrypt.hash_pwd_salt(new_password)
-    }))
+    repo.update(
+      User.changeset(password_request.user, %{
+        password_hash: Bcrypt.hash_pwd_salt(new_password)
+      })
+    )
   end
 
   defp update_password_request(repo, %{password_request: password_request}) do
-    repo.update(PasswordRequest.changeset(password_request, %{
-      used: true,
-    }))
+    repo.update(
+      PasswordRequest.changeset(password_request, %{
+        used: true
+      })
+    )
   end
 
   defp changeset(attrs) do
