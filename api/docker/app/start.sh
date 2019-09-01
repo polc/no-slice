@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # install dependencies
 mix deps.get
 

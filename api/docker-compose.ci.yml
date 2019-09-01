@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: docker/app/dev.Dockerfile
+      args:
+        - MIX_ENV=test
     environment:
       - MIX_ENV=test
       - APP_HOST=localhost

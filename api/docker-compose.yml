@@ -5,6 +5,13 @@ services:
     build:
       context: .
       dockerfile: docker/app/prod.Dockerfile
+      args:
+        - APP_SECRET=${APP_SECRET}
+        - DATABASE_PORT=5432
+        - DATABASE_HOST=database
+        - DATABASE_NAME=${DATABASE_NAME}
+        - DATABASE_USER=${DATABASE_USERNAME}
+        - DATABASE_PASSWORD=${DATABASE_PASSWORD}
     environment:
       - APP_SECRET=${APP_SECRET}
       - DATABASE_PORT=5432
