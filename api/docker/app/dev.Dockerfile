@@ -11,13 +11,10 @@ RUN addgroup -g 1000 docker \
 
 USER docker
 
-COPY --chown=docker:docker ./app/mix.* ./
+COPY --chown=docker:docker ./app ./
+COPY --chown=docker:docker ./docker/app/start.sh /start.sh
 
 RUN mix local.hex --force \
-    && mix local.rebar --force \
-    && mix do deps.get
-    #, deps.compile, compile
+    && mix local.rebar --force
 
-COPY --chown=docker:docker ./app ./
-
-CMD ["mix", "phx.server"]
+CMD ["/start.sh"]
