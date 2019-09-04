@@ -159,7 +159,7 @@ cartView cart removeMsg buttons =
 cartItemView : (ProductId -> msg) -> ( ProductId, CartItem ) -> Html msg
 cartItemView removeMsg ( productId, cartItem ) =
     div [ class "mb-6 flex" ]
-        [ img [ class "h-16 rounded-t object-cover", src "https://d1ralsognjng37.cloudfront.net/c9af7d3d-a7ed-4640-bbaf-f2b4b102bbf5.jpeg", alt "" ] []
+        [ img [ class "h-16 rounded object-cover", src "https://d1ralsognjng37.cloudfront.net/c9af7d3d-a7ed-4640-bbaf-f2b4b102bbf5.jpeg", alt "" ] []
         , div [ class "ml-4 flex flex-col justify-between text-sm" ]
             [ h1 [ class "font-display font-bold tracking-wide" ]
                 [ text (String.fromInt cartItem.quantity ++ " x ")
