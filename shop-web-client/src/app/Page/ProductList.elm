@@ -6,7 +6,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Illustration
-import Route exposing (href)
+import Route
 import Session exposing (..)
 import UI
 
@@ -73,7 +73,7 @@ view { session, showCartModal } =
                 , div [ class "hidden md:block flex-shrink-0 md:h-screen w-full md:w-96 sticky top-0 flex" ]
                     [ cartView session.cart
                         RemoveProductFromCart
-                        [ UI.largeButton "a" [ href Route.Checkout ] [ text "Check out" ]
+                        [ UI.largeButton "a" [ Route.href Route.Checkout ] [ text "Check out" ]
                         , span [ class "md:hidden block mx-auto mt-4 mb-8", onClick None ]
                             [ button [ class "border-b-4 border-green-600" ]
                                 [ text "Back to menu" ]
@@ -136,7 +136,7 @@ checkoutBarView : Cart -> Html Msg
 checkoutBarView cart =
     div [ class "h-full flex shadow-t-xl" ]
         [ button [ class "w-1/3 h-full flex items-center justify-center bg-white text-gray-700 font-bold", onClick ToggleCartModal ] [ text "Back" ]
-        , a [ class "w-2/3 h-full flex items-center justify-center bg-green-700 text-white font-bold", href Route.Checkout ] [ text "Check out" ]
+        , a [ class "w-2/3 h-full flex items-center justify-center bg-green-700 text-white font-bold", Route.href Route.Checkout ] [ text "Check out" ]
         ]
 
 
